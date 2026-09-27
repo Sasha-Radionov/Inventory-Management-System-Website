@@ -53,10 +53,10 @@ const table = new DataTable('#inventory-table', {
 
 // [MODAL FUNCTIONS]
 // store modal for multiple functions
-const newRowModal = document.getElementById('newRowModal');
+const newRowModal = document.getElementById('new-row-modal');
 
 // opens modal with input fields for user to input data
-document.getElementById('newRowBtn').addEventListener('click', () => {
+document.getElementById('new-row-btn').addEventListener('click', () => {
   newRowModal.style.display = 'block';
 });
 
@@ -81,12 +81,12 @@ document.addEventListener('keydown', (e) => {
 
 // [ICONS RENDERING]
 // store icon and iconPreview input fields for multiple functions
-const icon = document.getElementById('modal-icon');
+const icon = document.getElementById('ficon');
 const iconPrvw = document.getElementById('icon-preview')
-const name = document.getElementById('modal-name');
-const desc = document.getElementById('modal-description');
-const wght = document.getElementById('modal-weight');
-const prce = document.getElementById('modal-price');
+const name = document.getElementById('fname');
+const desc = document.getElementById('fdescription');
+const wght = document.getElementById('fweight');
+const prce = document.getElementById('fprice');
 
 // callback function that renders uploaded image
 function renderIcon(callback) {

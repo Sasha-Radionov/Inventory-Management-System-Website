@@ -61,24 +61,42 @@ h2 {
   margin-top: -1.rem;
 }
 
+.input-zone {
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-evenly;
+  padding-bottom: 4rem;
+  padding-right: 0.5rem;
+}
+
+.input-zone>div {
+  min-width: 100%;
+}
+
+.input-zone>div>input {
+  min-height: 8%;
+  width: 100%;
+}
+
+.required-field-star {
+  color: red;
+}
+
 .icon-zone {
   flex-direction: column;
   max-width: 100%;
-  min-width: 0;
+  min-width: 0%;
   height: auto;
   flex-wrap: nowrap;
-}
-
-.item-icon {
-  height: 10rem;
 }
 
 .icon-zone>div {
   margin-top: -1rem;
 }
 
-.required-field-star {
-  color: red;
+.icon-zone>div>input {
+  min-height: 8%;
+  width: 100%;
 }
 
 body {
@@ -94,34 +112,13 @@ body {
   padding: 0.5rem;
 }
 
+.item-icon {
+  max-width: 100%;
+}
+
 form>div.flex-container {
   flex-direction: row;
   justify-content: space-evenly;
   padding-bottom: 1rem;
-}
-
-.input-zone {
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding-bottom: 4rem;
-}
-
-.input-labels {
-  flex-direction: column;
-  align-items: end;
-  justify-content: space-evenly;
-  padding-right: 0.5rem;
-}
-
-.input-labels>* {
-  min-height: 8%;
-}
-
-.input-fields {
-  flex-direction: column; 
-  justify-content: space-evenly;
-}
-
-.input-fields>* {
-  min-height: 8%;
+  flex-wrap: wrap;
 }
