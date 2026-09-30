@@ -100,12 +100,60 @@ let rowToUpdate = '';
 // callback function that renders uploaded image
 function renderIcon(callback) {
   if (formIconInput.files.length != 0) {
-    const file = formIconInput.files[0];
+    const file = formIconInput.files[0];  
     const reader = new FileReader();
+    
     reader.readAsDataURL(file);
+    reader.onload = function () {
+      const image = new Image();
+      image.src = this.result;
+      
+      image.addEventListener('load', async () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 250;
 
-    reader.onload = function() {
-      callback(this.result); };
+        const ctx = canvas.getContext('2d');
+
+        let dWidth = image.naturalWidth;
+        let dHeight = image.naturalHeight;
+        let sWidth = image.naturalWidth;
+        let sHeight = image.naturalHeight;
+        let sX = 0;
+        let sY = 0;
+
+        if (dWidth > 250 && dHeight > 250) {
+          dWidth = dHeight = 250;
+        } else if (dWidth > 250) {
+          dWidth = 250;
+        } else if (dHeight > 250) {
+          dHeight = 250;
+        } else {
+          canvas.width = dWidth;
+          canvas.height = dHeight;
+        }
+
+        if (sWidth > sHeight) {
+          const diff = sWidth - sHeight;
+          sX = Math.floor(diff / 2);
+          sWidth = sHeight;
+        } else if (sWidth < sHeight)  {
+          const diff = sHeight - sWidth;
+          sY = Math.floor(diff / 2);
+          sHeight = sWidth;
+        }
+
+        ctx.drawImage(image, sX, sY, sWidth, sHeight, 0, 0, dWidth, dHeight);
+        const dataURL = canvas.toDataURL('image/jpeg', 1.0);
+
+        if (this.result.length < dataURL.length) {
+          console.log(this.result);
+          callback(this.result);
+        } else {
+          console.log(dataURL);
+          callback(dataURL);
+        } 
+      });
+    };
   } else { 
     callback(formIconPrvw.src);
   }
@@ -122,12 +170,8 @@ formIconInput.addEventListener('change', () => {
 document.getElementById('new-row-form').addEventListener('submit', (e) => {
   if (formSubmitBtn.textContent === 'Done') {
     e.preventDefault();
-    
-    renderIcon((src) => {
-      table.row.add(
-        addRowData(src, formNameInput.value, formDescInput.value, formWghtinput.value, formPrceInput.value, null)
-      ).draw();
-    });
+
+    table.row.add(addRowData(formIconPrvw.src, formNameInput.value, formDescInput.value, formWghtinput.value, formPrceInput.value, null)).draw();
   }
   else if (formSubmitBtn.textContent === 'Save') {
     e.preventDefault();
@@ -246,7 +290,6 @@ fetch(apiURL)
 
 
 // TODO: 
-// rescale the image before storing it,
 // delete confirmation,
 // inputs validation (weight in kgs/lbs (for multiple(e.g. 5) items: 1kg (5kg)), price in pc/gc/sc/cc), 
 // try-catch methods should display the error to the user, not the console,
