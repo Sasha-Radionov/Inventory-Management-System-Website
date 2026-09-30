@@ -31,7 +31,7 @@ def home():
     if request.method == 'PUT':
         data = request.get_json()
         for i, v in enumerate(inventory):
-            if v['id'] == data:
+            if v['id'] == data['id']:
                 inventory[i] = data
                 return jsonify(data), 200
         
@@ -40,9 +40,9 @@ def home():
         for item in inventory:
             if item['id'] == data:
                 inventory.remove(item)
-                return jsonify(inventory), 204
+                return jsonify(inventory), 200
             
-    return jsonify(inventory)
+    return jsonify(inventory), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

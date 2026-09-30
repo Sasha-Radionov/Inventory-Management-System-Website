@@ -99,6 +99,10 @@ h2 {
   width: 100%;
 }
 
+#icon-preview {
+  max-width: 25rem;
+}
+
 body {
   padding: 1rem;
   max-width: 100%;
@@ -106,6 +110,7 @@ body {
 
 #inventory-table {
   margin-top: 1rem;
+  min-width: 100%;
 }
 
 #inventory-table th, td {
@@ -113,7 +118,7 @@ body {
 }
 
 .item-icon {
-  max-width: 100%;
+  max-width: 7rem;
 }
 
 form>div.flex-container {
