@@ -27,3 +27,7 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
+
+# Python
+venv/
+.env
