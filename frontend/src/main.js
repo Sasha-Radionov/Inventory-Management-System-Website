@@ -223,19 +223,30 @@ document.getElementById('inventory-table').addEventListener('click', (e) => {
   }
   else if (e.target.classList.contains('delete-item')) {
     const row = e.target.closest('tr');
-    const payload = row.id;
-
-    try {
-      fetch(apiURL, {
-        'method': "DELETE",
-        'headers': {'Content-Type': "application/json"},
-        'body': JSON.stringify(payload),
-      });
-
-      table.row(row).remove().draw();
-    } catch {
-      console.error('Failed to delete item. Please try again later.');
-    }
+    Swal.fire({
+      title: 'Delete item',
+      text: "Are you sure you want to proceed? This action is irreversible.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const payload = row.id;
+    
+        try {
+          fetch(apiURL, {
+            'method': "DELETE",
+            'headers': {'Content-Type': "application/json"},
+            'body': JSON.stringify(payload),
+          });
+    
+          table.row(row).remove().draw();
+        } catch {
+          console.error('Failed to delete item. Please try again later.');
+        }
+      }
+    });
   }
 });
 
@@ -290,7 +301,6 @@ fetch(apiURL)
 
 
 // TODO: 
-// delete confirmation,
 // inputs validation (weight in kgs/lbs (for multiple(e.g. 5) items: 1kg (5kg)), price in pc/gc/sc/cc), 
 // try-catch methods should display the error to the user, not the console,
 // table data transfer to csv using python(and other way around), 
