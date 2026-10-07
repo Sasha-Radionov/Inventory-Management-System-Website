@@ -18,7 +18,7 @@ This project uses Python Flask backend and vanilla JavaScript frontend with Data
 ## Requirements
 1. Python **3.14+**
 2. Node.js **24.16+**
-3. npm **11.16.0**
+3. npm **11.16+**
 
 ## Installation
 
